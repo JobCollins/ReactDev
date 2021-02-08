@@ -26,10 +26,16 @@ class App extends Component {
   render() {
     return (
       <div>
+        {/* use short circuit: expression && expression
+        if first expression is true then show the second expression  */}
         {this.state.screen === 'list' && (
           <ListContacts 
           onDeleteContact={this.removeContact} 
-          contacts={this.state.contacts}/>
+          contacts={this.state.contacts}
+          onNavigate={() => {
+            this.setState({screen:'create'})
+          }}
+          />
         )}
         {this.state.screen === 'create' && (
           <CreateContact
