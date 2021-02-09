@@ -58,7 +58,7 @@ const calendar = (state = initialCalendarState, action) => {
                 ...state,
                 [day]:{
                     ...state[day],
-                    [meak]:null,
+                    [meal]:null,
                 }
             }
         default:
