@@ -5,6 +5,7 @@ import App from './components/App'
 import reportWebVitals from './reportWebVitals';
 import { createStore } from 'redux'
 import reducer from './reducers'
+import { Provider } from 'react-redux' //prevent prop threading
 
 const store = createStore(
   reducer,
@@ -14,7 +15,9 @@ const store = createStore(
 
 ReactDOM.render(
   <React.StrictMode>
-    <App store={store}/>
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
