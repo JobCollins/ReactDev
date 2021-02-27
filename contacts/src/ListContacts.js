@@ -23,13 +23,21 @@ class ListContacts extends Component{
         })
     }
 
+    clearQuery = () => {
+        this.setState({query:''})
+    }
+
     render(){
+        //ES6 destructuring
+        const { contacts, onDeleteContact } = this.props
+        const { query } = this.state
+
         let showingContacts
-        if (this.state.query) {
-            const match = new RegExp(escapeRegExp(this.state.query), 'i') //escape any special character 'i' ignores case
-            showingContacts = this.props.contacts.filter((contact) => match.test(contact.name))
+        if (query) {
+            const match = new RegExp(escapeRegExp(query), 'i') //escape any special character 'i' ignores case
+            showingContacts = contacts.filter((contact) => match.test(contact.name))
         }else{
-            showingContacts = this.props.contacts
+            showingContacts = contacts
         }
 
         showingContacts.sort(sortBy('name')) //sort by name only
@@ -42,10 +50,18 @@ class ListContacts extends Component{
                     className='search-contacts' 
                     type='text' 
                     placeholder='Search Contacts'
-                    value={this.state.query}//value to match whatever the query is
+                    value={query}//value to match whatever the query is
                     onChange={(e) => this.updateQuery(e.target.value)}//WHENEVER THE INPUT CHNANGES INVOKE AN UPDATE passing it the specific value typed in input field
                     />
                 </div>
+
+                {/* render a UI based on the changed state  */}
+                {showingContacts.length !== contacts.length && (
+                    <div className='showing-contacts'>
+                        <span>Now showing {showingContacts.length} of {contacts.length}</span>
+                        <button onClick={this.clearQuery}>Show all</button>
+                    </div>
+                )}
                 {/* specify the UI for contacts */}
                 <ol className='contact-list'>
                     {/* access each item in the contacts array
