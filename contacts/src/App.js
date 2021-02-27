@@ -40,7 +40,9 @@ class App extends Component{
       //pass the above contacts to the ListContacts component
       //change to access the state within the App component
       //invoke the function whenever one of the delete button is clicked
-      <ListContacts onDeleteContact={this.removeContact} contacts={this.state.contacts} />
+      <div>
+        <ListContacts onDeleteContact={this.removeContact} contacts={this.state.contacts} />
+      </div>
     )
   }
 }

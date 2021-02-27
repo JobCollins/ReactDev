@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import PropTypes from 'prop-types'
 
 /*maps over each of the contacts in App.js*/
 class ListContacts extends Component{
@@ -24,7 +24,7 @@ class ListContacts extends Component{
                             <p>{contact.email}</p>
                         </div>
                         {/* //invoke the removeContact function in App on click */}
-                        <button onClick={() => props.onDeleteContact(contact)} className='contact-remove'>
+                        <button onClick={() => this.props.onDeleteContact(contact)} className='contact-remove'>
                             Remove
                         </button>
                     </li>
@@ -32,6 +32,12 @@ class ListContacts extends Component{
             </ol>
         )
     }
+}
+//using PropTypes to make sure 
+//we are passing the right data type
+ListContacts.propTypes = {
+    contacts: PropTypes.array.isRequired,
+    onDeleteContact: PropTypes.func.isRequired
 }
 
 /*USING STATELESS FUNCTIONAL COMPONENT
