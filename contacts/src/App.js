@@ -27,11 +27,20 @@ class App extends Component{
       }
     ]
   }
+  //function responsible for updating current state
+  removeContact = (contact) => {
+    this.setState((state) => ({
+      /*remove contact by filtering out 
+      the clicked contact id from the list*/
+      contacts: state.contacts.filter((contact) => contact.id !== contact.id)
+    }))
+  }
   render(){
     return  (
       //pass the above contacts to the ListContacts component
       //change to access the state within the App component
-      <ListContacts contacts={this.state.contacts} />
+      //invoke the function whenever one of the delete button is clicked
+      <ListContacts onDeleteContact={this.removeContact} contacts={this.state.contacts} />
     )
   }
 }
