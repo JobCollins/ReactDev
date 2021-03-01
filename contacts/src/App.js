@@ -20,10 +20,12 @@ class App extends Component{
   //function responsible for updating current state
   removeContact = (contact) => {
     this.setState((state) => ({
-      /*remove contact by filtering out 
+      /*remove contact from local state by filtering out 
       the clicked contact id from the list*/
       contacts: state.contacts.filter((contact) => contact.id !== contact.id)
     }))
+    //remove contact from the backend db
+    ContactsAPI.remove(contact)
   }
   render(){
     return  (
