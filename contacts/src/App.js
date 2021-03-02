@@ -31,6 +31,15 @@ class App extends Component{
     //remove contact from the backend db
     ContactsAPI.remove(contact)
   }
+
+  createContact(contact) {
+    ContactsAPI.create(contact).then( contact => {//create contact in the server then
+      this.setState(state => ({//send it back so that internal state can be changed
+        contacts: state.contacts.concat([ contact ])
+      }))
+    })
+  }
+
   render(){
     return  (
       //pass the above contacts to the ListContacts component
@@ -46,7 +55,14 @@ class App extends Component{
         />
         )}/>
         {/* Using Route to render pages */}
-        <Route path="/create" component={CreateContact}/>
+        <Route path="/create" render={({ history }) => (
+          <CreateContact 
+          onCreateContact={(contact) => {
+            this.createContact(contact)
+            history.push('/')
+          }} //Add new contact to state
+        />
+        )}/>
         
       </div>
     )
