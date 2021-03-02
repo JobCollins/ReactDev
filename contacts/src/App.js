@@ -1,12 +1,15 @@
 import React, { Component } from "react";
 import ListContacts from './ListContacts'
 import * as ContactsAPI from './utils/ContactsAPI'
+import CreateContact from './CreateContact'
 
 class App extends Component{
   //Adding state to App so that App can manage it
   state = {
     //adding the previous contact variable to live as state
-    contacts : []
+    contacts : [],
+    //state to determine which screen to show
+    screen: 'list'  //list or create
   }
 
   //CREATE LIFECYCLE EVENT TO MAKE NETWORK REQUESTS
@@ -32,8 +35,14 @@ class App extends Component{
       //pass the above contacts to the ListContacts component
       //change to access the state within the App component
       //invoke the function whenever one of the delete button is clicked
-      <div>
-        <ListContacts onDeleteContact={this.removeContact} contacts={this.state.contacts} />
+      <div classsName="app">
+        {this.state.screen === 'list' && (
+          <ListContacts onDeleteContact={this.removeContact} contacts={this.state.contacts} />
+        )}
+        {this.state.screen === 'create' &&(
+          <CreateContact/>
+        )}
+        
       </div>
     )
   }
