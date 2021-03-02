@@ -37,7 +37,13 @@ class App extends Component{
       //invoke the function whenever one of the delete button is clicked
       <div classsName="app">
         {this.state.screen === 'list' && (
-          <ListContacts onDeleteContact={this.removeContact} contacts={this.state.contacts} />
+          <ListContacts 
+            onDeleteContact={this.removeContact} 
+            contacts={this.state.contacts}
+            onNavigate={() => {
+              this.setState({screen: 'create'})
+            }}
+          />
         )}
         {this.state.screen === 'create' &&(
           <CreateContact/>

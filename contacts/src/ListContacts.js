@@ -53,6 +53,13 @@ class ListContacts extends Component{
                     value={query}//value to match whatever the query is
                     onChange={(e) => this.updateQuery(e.target.value)}//WHENEVER THE INPUT CHNANGES INVOKE AN UPDATE passing it the specific value typed in input field
                     />
+                    <a
+                        href="#create"
+                        onClick={this.props.onNavigate}
+                        className="add-contact"
+                    >
+                        Add Contact
+                    </a>
                 </div>
 
                 {/* render a UI based on the changed state  */}
