@@ -2,14 +2,15 @@ import React, { Component } from "react";
 import ListContacts from './ListContacts'
 import * as ContactsAPI from './utils/ContactsAPI'
 import CreateContact from './CreateContact'
+import { Route } from 'react-router-dom'
 
 class App extends Component{
   //Adding state to App so that App can manage it
   state = {
     //adding the previous contact variable to live as state
     contacts : [],
-    //state to determine which screen to show
-    screen: 'list'  //list or create
+    //state to determine which screen to show not needed any more
+    
   }
 
   //CREATE LIFECYCLE EVENT TO MAKE NETWORK REQUESTS
@@ -36,18 +37,16 @@ class App extends Component{
       //change to access the state within the App component
       //invoke the function whenever one of the delete button is clicked
       <div classsName="app">
-        {this.state.screen === 'list' && (
+        {/* using route to render page  */}
+        <Route exact path="/" render={() => (
           <ListContacts 
-            onDeleteContact={this.removeContact} 
-            contacts={this.state.contacts}
-            onNavigate={() => {
-              this.setState({screen: 'create'})
-            }}
-          />
-        )}
-        {this.state.screen === 'create' &&(
-          <CreateContact/>
-        )}
+          onDeleteContact={this.removeContact} 
+          contacts={this.state.contacts}
+          // removed onNavigate prop since it's not needed 
+        />
+        )}/>
+        {/* Using Route to render pages */}
+        <Route path="/create" component={CreateContact}/>
         
       </div>
     )

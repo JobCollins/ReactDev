@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import escapeRegExp from 'escape-string-regexp'
 import sortBy from 'sort-by'
+import { Link } from 'react-router-dom'
 
 /*maps over each of the contacts in App.js*/
 class ListContacts extends Component{
@@ -53,13 +54,12 @@ class ListContacts extends Component{
                     value={query}//value to match whatever the query is
                     onChange={(e) => this.updateQuery(e.target.value)}//WHENEVER THE INPUT CHNANGES INVOKE AN UPDATE passing it the specific value typed in input field
                     />
-                    <a
-                        href="#create"
-                        onClick={this.props.onNavigate}
+                    <Link
+                        to="/create"
                         className="add-contact"
                     >
                         Add Contact
-                    </a>
+                    </Link>
                 </div>
 
                 {/* render a UI based on the changed state  */}
