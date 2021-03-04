@@ -7,7 +7,11 @@ import { createStore } from 'redux'
 import reducer from './reducers'
 
 //create store
-const store = createStore(reducer)
+const store = createStore(
+  reducer,
+  //invoking redux devtools if it exists on the browser. For debugging
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__() 
+  )
 
 // console.log(store);
 
