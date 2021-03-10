@@ -3,15 +3,29 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './components/App';
 import reportWebVitals from './reportWebVitals';
-import { createStore } from 'redux'
+import { createStore, applyMiddleware, compose } from 'redux'
 import reducer from './reducers'
 import { Provider } from 'react-redux'
 
+//create the logger middleware to log pre-action state and post-action state
+const logger = store => next => action => {
+  console.group(action.type)
+  console.info('dispatching', action)
+  let result = next(action)
+  console.log('next state', store.getState());
+  console.groupEnd(action.type)
+  return result
+}
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE_ || compose
 //create store
 const store = createStore(
   reducer,
+  composeEnhancers(
+    applyMiddleware(logger)
+  )
+  
   //invoking redux devtools if it exists on the browser. For debugging
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__() 
+   
   )
 
 // console.log(store);
