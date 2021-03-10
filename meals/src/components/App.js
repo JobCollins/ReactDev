@@ -14,7 +14,8 @@ class App extends Component {
 }
 
 //function that maps redux state to the component props
-function mapStatetoProps(calendar) {
+//since more than one reducer is been imported>>>>>
+function mapStatetoProps({calendar, food}) {
   //calendar is the state
 
   const dayOrder = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday']
@@ -23,7 +24,7 @@ function mapStatetoProps(calendar) {
     calendar: dayOrder.map((day) => ({
       day,
       meals:Object.keys(calendar[day]).reduce((meals, meal)=>{
-        meals[meal] = calendar[day][meal] ? calendar[day][meal] : null
+        meals[meal] = calendar[day][meal] ? food[calendar[day][meal]] : null
 
         return meals
       }, {})
